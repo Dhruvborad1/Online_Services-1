@@ -7,25 +7,27 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
         body {
-            font-family: Arial, sans-serif;
-           background-image: url(https://img.freepik.com/free-photo/green-product-background_53876-90135.jpg);
+            background-image: url();
             background-size: cover;
             background-repeat: no-repeat;
+            font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
+            position: relative; /* For positioning the bubble container */
+            overflow: hidden; /* To hide overflowing bubbles */
+            background-color: #96c5ee;
         }
         .container {
             background-color: white;
             border-radius: 10px;
             box-shadow: 0px 0px 13px 7px rgba(0,0,0,0.44);
--webkit-box-shadow: 0px 0px 13px 7px rgba(0,0,0,0.44);
--moz-box-shadow: 0px 0px 13px 7px rgba(0,0,0,0.44);         
-             width: 400px;
+            width: 400px;
             padding: 20px;
             box-sizing: border-box;
+            z-index: 1; /* Ensure form is above bubbles */
         }
         .header {
             background-image: url('https://t3.ftcdn.net/jpg/03/65/52/86/360_F_365528663_miV08QzGGVLqhRRQVQ4B9C9PtoTRJiSv.jpg');
@@ -36,13 +38,11 @@
             height: 170px;
             display: flex;
             justify-content: center;
-            align-items: top;
+            align-items: center;
             color: rgb(255, 255, 255);
             font-size: 24px;
             font-weight: bold;
             box-shadow: 0px 33px 39px 7px rgba(0,0,0,0.75) inset;
-            -webkit-box-shadow: 0px 33px 39px 7px rgba(0,0,0,0.75) inset;
-            -moz-box-shadow: 0px 33px 39px 7px rgba(0,0,0,0.75) inset;
         }
         .form-group {
             margin-bottom: 15px;
@@ -75,14 +75,12 @@
             cursor: pointer;
             font-size: 16px;
             width: 100%;
-
         }
         .submit-btn button:hover {
             background-color: #1565c0;
             transition: 0.2s;
-
         }
-        .bt1{
+        .bt1 {
             background-color: #1e88e5;
             color: white;
             padding: 10px 20px;
@@ -92,24 +90,50 @@
             font-size: 16px;
             width: 77%;
             text-align: center;
-            
-            
         }
-
         .bt1:hover {
             background-color: #1565c0;
             transition: 0.2s;
         }
-        .t1{
+        .t1 {
             width: 100%;
         }
-        .t1 tr td{
+        .t1 tr td {
             width: 50%;
         }
-
+        /* Bubble Animation */
+        .bubbles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* Allow clicks to go through to the form */
+            overflow: hidden;
+            z-index: 0; /* Ensure bubbles are below the form */
+        }
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.7);
+            animation: rise 6s infinite;
+            opacity: 0.5;
+        }
+        @keyframes rise {
+            0% {
+                transform: translateY(100vh);
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-10vh);
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 <body>
+    <div class="bubbles" id="bubbleContainer"></div>
+
     <div class="container">
         <div class="header">Product Listing Form</div>
         <br>
@@ -132,16 +156,38 @@
             </div>
             <div class="submit-btn">
                 <table class="t1">
-                <tr>
-                <td><button type="submit">Submit</button></td>
-                <td><a href="display.html"><div class="bt1">View</div></a></td>
-                </tr>
+                    <tr>
+                        <td><button type="submit">Submit</button></td>
+                        <td><a href="display.html"><div class="bt1">View</div></a></td>
+                    </tr>
+                </table>
             </div>
-
         </form>
     </div>
 
     <script>
+        // Function to create bubbles
+        function createBubble() {
+            const bubbleContainer = document.getElementById('bubbleContainer');
+            const bubble = document.createElement('div');
+            const size = Math.random() * 50 + 10; // Random size between 10px and 60px
+            const left = Math.random() * 100; // Random position from 0% to 100%
+            bubble.classList.add('bubble');
+            bubble.style.width = size + 'px';
+            bubble.style.height = size + 'px';
+            bubble.style.left = left + '%';
+            bubble.style.animationDuration = (Math.random() * 5 + 3) + 's'; // Random duration between 3s and 8s
+            bubbleContainer.appendChild(bubble);
+
+            // Remove bubble after animation ends
+            bubble.addEventListener('animationend', () => {
+                bubbleContainer.removeChild(bubble);
+            });
+        }
+
+        // Create bubbles every 500ms
+        setInterval(createBubble, 200);
+
         document.getElementById('productForm').addEventListener('submit', function(event) {
             event.preventDefault();
 
@@ -168,4 +214,3 @@
     </script>
 </body>
 </html>
-
