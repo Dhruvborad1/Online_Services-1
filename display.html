@@ -3,410 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product List</title>
+    <title>Login Page</title>
     <link rel="icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJW7Sg7bbs9QuD43TE_3UnCT9RrJT1slX8GpW_cy-D9hjEMSYU">
-
 
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #e0f7fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
             margin: 0;
-            padding: 20px;
+            background-color: #96c5ee;
         }
-        .table-container {
+        .container {
             background-color: white;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0px 0px 13px 7px rgba(0,0,0,0.44);
+            width: 300px;
             padding: 20px;
             box-sizing: border-box;
         }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
+        .form-group {
+            margin-bottom: 15px;
         }
-        th, td {
-            border: 1px solid #ccc;
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group input {
+            width: 100%;
             padding: 10px;
-            text-align: left;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
         }
-        th {
-            background-color: #f2f2f2;
-        }
-        .action-btn {
-            cursor: pointer;
-            margin-right: 10px;
-           
-        }
-        .bt3{
-            background-color: #1e88e5;
-            width: 80px;
-            height: 30px;
-            border: none;
-            border-radius: 25px;
-            text-align: center;
-            padding-left:10px ;
-            color: #ffffff;
-            
-        }
-        .bt3:hover{
-            background-color: #ffffff;
-            width: 80px;
-            height: 30px;
-            color: #1e88e5;
-            border: 1px solid #000000;
-            transition: 0.2s;
-            box-shadow: #1e88e5 2px 2px 2px ;
-        }
-        .quantity-controls {
+        .submit-btn {
             display: flex;
-            align-items: center;
+            justify-content: center;
         }
-        .quantity-controls button {
-            margin: 0 5px;
+        .submit-btn button {
+            background-color: #1e88e5;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
             cursor: pointer;
-        }
-        /* Modal styles */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
+            font-size: 16px;
             width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.5);
         }
-        .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 300px;
-            border-radius: 10px;
-        }
-        .modal-header, .modal-footer {
-            display: flex;
-            justify-content: space-between;
-        }
-        .close {
-            cursor: pointer;
-            color: red;
-        }
-
-        .bt2{
-            background-color: #ffffff;
-            border: 1px solid #000000;
-            width: 28%;
-            height: 28px;
-            border-radius: 20px;
-            color: #000000;
-            font-size: 15px;
-            text-align: center;
+        .submit-btn button:hover {
+            background-color: #1565c0;
             transition: 0.3s;
-        }
-        .bt2:hover{
-            background-color: #000000;
-            border: 1px solid #ffffff;
-            width: 28%;
-            height: 28px;
             border-radius: 20px;
-            color: #ffffff;
-            font-size: 15px;
-            text-align: center;
+            box-shadow: 0px 0px 5px 4px rgba(0,0,0,0.53);
+-webkit-box-shadow: 0px 0px 5px 4px rgba(0,0,0,0.53);
+-moz-box-shadow: 0px 0px 5px 4px rgba(0,0,0,0.53);
         }
-        .qbt{
-            text-align: end;
-            width: 85%;
-        }
-        @media (max-width : 976px){
-            .bt2{
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
-        }
-        .bt2:hover{
-          
-            width: 25px;
-            height: 25px;
-           
-        }
-        .bt3{
-            margin: 2px;
-        }
-        }
-        .th4{
-            width: 20.1%;
-        }
-
-
-        /* Edit Modal */
-
-        .form-container {
-    display: flex;
-    flex-direction: column;
-    gap: 10px; /* Space between form elements */
-}
-
-.form-group {
-    display: flex;
-    flex-direction: column;
-}
-
-.form-input {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-}
-
-.quantity-controls {
-    display: flex;
-    align-items: center;
-}
-
-.quantity-input {
-    width: 60px; /* Fixed width for quantity input */
-}
-
-
-
-.submit-btn {
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    width: 100%;
-}
-
-.submit-btn:hover {
-    background-color: #388e3c; /* Darker shade on hover */
-}
-
-header{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        position: sticky;
-        top: 0;
-        background-color: #e0f7fa;
-        margin-top: -10px;
-}
-.bt4{
-            background-color: #1e88e5;
-            width: 150px;
-            height: 35px;
-            font-weight: 600;
-            border: none;
-            border-radius: 25px;
-            text-align: center;
-            padding-left:10px ;
-            color: #ffffff;
-
-}
-.bt4:hover{
-            box-shadow: 0px 0px 11px 4px rgba(0,0,0,0.81);
-            -webkit-box-shadow: 0px 0px 11px 4px rgba(0,0,0,0.81);
-            -moz-box-shadow: 0px 0px 11px 4px rgba(0,0,0,0.81);
-            transition: 0.5s;
-            transform: scale(1.08);
-            background-color: #ffffff;
-            color: #1e88e5;
-            border: solid 1px #000000;
-
-}
     </style>
 </head>
 <body>
-    <header>
-    <h1>Product List</h1>
-    <a href="form.html"><button class="bt4">Add Another Listing</button></a>
-    </header>
-    <div class="table-container" style="overflow-x: auto;">
-        <table id="productTable">
-            <thead>
-                <tr>
-                    <th>Item Name</th>
-                    <th>Quantity</th>
-                    <th>Price (1 pcs)</th>
-                    <th>Date</th>
-                    <th>Total Cost</th>
-                    <th class="th4">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Dynamic rows will be added here -->
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="1" style="text-align: right; font-weight: bold; background-color: #ccc;">Total Quantity:</td>
-                    <td id="totalQuantity" style="background-color: #ccc; color: #db2323;">0</td>
-                    <td></td>
-                    <td colspan="1" style="text-align: right; font-weight: bold; background-color: #ccc;">Total Cost:</td>
-                    <td id="totalCost" style="background-color: #ccc; color: #db2323;">0.00</td>
-                    <td></td>
-                </tr>
-            </tfoot>
-        </table>
-    </div>
-
-    <!-- Edit Modal -->
-    <div id="editModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Edit Product</h2>
-                <span class="close" onclick="closeModal()">&times;</span>
+    <div class="container">
+        <h2>Login Page</h2>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="password">Enter Password:</label>
+                <input type="password" id="password" name="password" required>
             </div>
-            <form id="editForm" class="form-container">
-                <div class="form-group">
-                    <label for="editItem">Item Name:</label>
-                    <input type="text" id="editItem" class="form-input" required>
-                </div>
-                <div class="form-group">
-                    <label for="editQuantity">Quantity:</label>
-                    <input type="number" id="editQuantity" class="form-input" required>
-                </div>
-                <div class="form-group">
-                    <label for="editPrice">Price (1 pcs):</label>
-                    <input type="number" id="editPrice" class="form-input" required>
-                </div>
-                <div class="form-group">
-                    <label for="editDate">Choose date:</label>
-                    <input type="date" id="editDate" class="form-input" required>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="submit-btn">Save</button>
-                </div>
-            </form>
-            
-        </div>
+            <div class="submit-btn">
+                <button type="submit">Login</button>
+            </div>
+        </form>
     </div>
 
     <script>
-        let editIndex;
-        let i=1;
-        function loadProducts() {
-            const products = JSON.parse(localStorage.getItem('products')) || [];
-            const tableBody = document.getElementById('productTable').getElementsByTagName('tbody')[0];
-            let totalCostSum = 0; // Initialize total cost sum
-            let totalQuantitySum = 0; // Initialize total quantity sum
+        
+            // Set the password
+            localStorage.setItem('password', 'dhruv123');
 
-            products.forEach((product, index) => {
-                const totalCost = product.quantity * product.price; // Calculate total cost
-                totalCostSum += totalCost; // Add to total cost sum
-                totalQuantitySum += parseInt(product.quantity); // Add to total quantity sum
-                const newRow = tableBody.insertRow();
-                newRow.innerHTML = `
-                    <td>${i++}.  ${product.item}</td>
-                    <td>
-                        <div class="quantity-controls">
-                            <span id="quantity-${index}">${product.quantity}</span>
-                            <div class="qbt">
-                            <button type="button" onclick="adjustProductQuantity(${index}, 1)" class="bt2">+</button>
-                            <button type="button" onclick="adjustProductQuantity(${index}, -1)" class="bt2">-</button>
-                            </div>
-                        </div>
-                    </td>
-                    <td>${product.price}</td>
-                    <td>${product.date}</td>
-                    <td>${totalCost.toFixed(2)}</td>
-                    <td>
-                        <button class="bt3"><span class="action-btn" onclick="openModal(${index})">Edit</span></button>
-                        <button class="bt3"><span class="action-btn" onclick="deleteProduct(${index})">Delete</span></button>
-                    </td>
-                `;
-            });
-
-            // Display the total sums in the footer
-            document.getElementById('totalCost').textContent = totalCostSum.toFixed(2);
-            document.getElementById('totalQuantity').textContent = totalQuantitySum;
-        }
-
-        function adjustProductQuantity(index, change) {
-            let products = JSON.parse(localStorage.getItem('products')) || [];
-            let product = products[index];
-            let newQuantity = Math.max(0, parseInt(product.quantity) + change); // Prevent negative quantities
-
-            product.quantity = newQuantity;
-            localStorage.setItem('products', JSON.stringify(products)); // Update local storage
-
-            // Update the displayed quantity
-            document.getElementById(`quantity-${index}`).textContent = newQuantity;
-
-            // Recalculate and update the total cost for this product
-            const totalCost = newQuantity * product.price;
-            const totalCostCell = document.querySelector(`#productTable tbody tr:nth-child(${index + 1}) td:nth-child(5)`);
-            totalCostCell.textContent = totalCost.toFixed(2);
-
-            // Update total quantity and total cost
-            updateTotals();
-        }
-
-        function updateTotals() {
-            const products = JSON.parse(localStorage.getItem('products')) || [];
-            let totalCostSum = 0;
-            let totalQuantitySum = 0;
-
-            products.forEach(product => {
-                totalCostSum += product.quantity * product.price;
-                totalQuantitySum += parseInt(product.quantity);
-            });
-
-            document.getElementById('totalCost').textContent = totalCostSum.toFixed(2);
-            document.getElementById('totalQuantity').textContent = totalQuantitySum;
-        }
-
-        function openModal(index) {
-            const products = JSON.parse(localStorage.getItem('products')) || [];
-            const product = products[index];
-
-            // Populate the form with current product data
-            document.getElementById('editItem').value = product.item;
-            document.getElementById('editQuantity').value = product.quantity;
-            document.getElementById('editPrice').value = product.price;
-            document.getElementById('editDate').value = product.date;
-
-            editIndex = index; // Store the index for editing
-            document.getElementById('editModal').style.display = 'block';
-        }
-
-        function closeModal() {
-            document.getElementById('editModal').style.display = 'none';
-        }
-
-        document.getElementById('editForm').addEventListener('submit', function(event) {
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
             event.preventDefault();
 
-            const updatedProduct = {
-                item: document.getElementById('editItem').value,
-                quantity: document.getElementById('editQuantity').value,
-                price: document.getElementById('editPrice').value,
-                date: document.getElementById('editDate').value
-            };
+            const password = document.getElementById('password').value;
+            const storedPassword = localStorage.getItem('password');
 
-            let products = JSON.parse(localStorage.getItem('products')) || [];
-            products[editIndex] = updatedProduct; // Update the product
-            localStorage.setItem('products', JSON.stringify(products));
-
-            closeModal(); // Close the modal
-            location.reload(); // Reload to see changes
+            if (password === storedPassword) {
+                window.location.href = 'form.html';
+            } else {
+                alert('Incorrect password!');
+            }
         });
-
-        function deleteProduct(index) {
-            let products = JSON.parse(localStorage.getItem('products')) || [];
-            products.splice(index, 1);
-            localStorage.setItem('products', JSON.stringify(products));
-            location.reload(); // Reload the page to reflect changes
-        }
-
-        // Load products on page load
-        loadProducts();
     </script>
 </body>
 </html>
-
