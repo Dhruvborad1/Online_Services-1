@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #96c5ee;
+        }
+        .container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0px 0px 13px 7px rgba(0,0,0,0.44);
+            width: 300px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .submit-btn {
+            display: flex;
+            justify-content: center;
+        }
+        .submit-btn button {
+            background-color: #1e88e5;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+        .submit-btn button:hover {
+            background-color: #1565c0;
+            transition: 0.2s;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Login Page</h2>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="password">Enter Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="submit-btn">
+                <button type="submit">Login</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+            localStorage.setItem('password', 'dhruv123');
+
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const password = document.getElementById('password').value;
+            const storedPassword = localStorage.getItem('password');
+
+            if (password === storedPassword) {
+                window.location.href = 'form.html';
+            } else {
+                alert('Incorrect password!');
+            }
+        });
+    </script>
+</body>
+</html>
